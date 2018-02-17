@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Geometric Layouts</title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular/app.js"></script>
+    <script src="Scripts/angular/geolayout.service.js"></script>
+    <script src="Scripts/angular/geolayout.controller.js"></script>
+    <link href="Content/AppStyleSheet.css" rel="stylesheet" />
+</head>
+<body ng-controller="GeoLayoutController as vm">
+    <div class="layout-container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Enter row (A-F):</label>
+                        <input type="text" ng-model="vm.row" maxlength="1" class="form-control text-uppercase" ng-pattern="/([A-F])/" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Enter column (1-12):</label>
+                        <input type="number" ng-model="vm.column" min="1" max="12" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" ng-click="vm.calculateCoordinates()" value="Calculate Coordinates" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="row" ng-if="vm.coordinates.length > 0">
+                    <div class="col-md-12">
+                        The coordinates are:
+                        <div style="padding: 10px">
+                            <span ng-repeat="c in vm.coordinates" style="display: block; margin-bottom: 5px"> Vertex {{$index + 1 }}: ({{c.X}};{{c.Y}}) </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Enter Coordinate V1:</label>
+                        <input type="number" ng-model="vm.v1.X" placeholder="X" class="form-control" />
+                        <input type="number" ng-model="vm.v1.Y" placeholder="Y" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Enter Coordinate V2:</label>
+                        <input type="number" ng-model="vm.v2.X" placeholder="X" class="form-control" />
+                        <input type="number" ng-model="vm.v2.Y" placeholder="Y" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Enter Coordinate V3:</label>
+                        <input type="number" ng-model="vm.v3.X" placeholder="X" class="form-control" />
+                        <input type="number" ng-model="vm.v3.Y" placeholder="Y" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" ng-click="vm.calculateRowColumn()" value="Calculate Row & Column" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="row" ng-if="vm.rowcolumn.Row">
+                    <div class="col-md-12">
+                        <div style="padding: 10px">
+                            The row is: {{vm.rowcolumn.Row}} <br />
+                            The column is: {{vm.rowcolumn.Column}} 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

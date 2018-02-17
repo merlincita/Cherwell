@@ -1,0 +1,21 @@
+﻿
+.layout-container {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 40px;
+}
+
+.layout-container .row {
+    margin-bottom: 20px;
+}
+
+.layout-container [type=text] {
+    max-width: 100px;
+    display: inline !important;
+}
+
+.layout-container [type=number] {
+    max-width: 100px;
+    display: inline !important;
+}
