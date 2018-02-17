@@ -115,7 +115,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Coordinate.cs" />
-    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\GridItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

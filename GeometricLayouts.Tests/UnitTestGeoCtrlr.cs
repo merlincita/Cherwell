@@ -8,10 +8,21 @@ namespace GeometricLayouts.Tests
     [TestClass]
     public class UnitTestGeoCtrlr
     {
+        /*
+         A good test could be:
+         foreach col in [1..6] // A..F
+            foreach row in [1,12]
+            {
+                result = CalculateTriangleCoordinates(new griditem(col, row))
+                vertexs = do some math here to know what vertexs are generated based on col, row
+                compare the items in result with vertexs
+            }
+         */
+
         [TestMethod]
         public void TestCalculationTriangleCoordinates()
         {
-            var item = new Item { Column = 8, Row = 3 }; // row = C
+            var item = new GridItem { Column = 8, Row = 3 }; // row = C
             var controller = new GeometryController();
             var result = controller.CalculateTriangleCoordinates(item);
             Assert.AreEqual(result.Count, 3);

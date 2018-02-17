@@ -16,59 +16,66 @@
     <div class="layout-container">
         <div class="row">
             <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Enter row (A-F):</label>
-                        <input type="text" ng-model="vm.row" maxlength="1" class="form-control text-uppercase" ng-pattern="/([A-F])/" />
+                <form name="coordinatesForm" ng-submit="vm.calculateCoordinates()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Enter row (A-F):</label>
+                            <input type="text" name="row" ng-model="vm.row" maxlength="1" class="form-control" ng-pattern="/^[A-F]$/" required />
+                            <span ng-show="coordinatesForm.row.$error.pattern" style="color:red">Not valid row</span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Enter column (1-12):</label>
-                        <input type="number" ng-model="vm.column" min="1" max="12" class="form-control" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Enter column (1-12):</label>
+                            <input type="number" name="column" ng-model="vm.column" ng-min="1" ng-max="12" class="form-control" required />
+                            <span ng-show="coordinatesForm.column.$error.min" style="color:red">The minimum value is 1</span>
+                            <span ng-show="coordinatesForm.column.$error.max" style="color:red">The maximum value is 12</span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="button" ng-click="vm.calculateCoordinates()" value="Calculate Coordinates" class="btn btn-primary" />
+                    <div class="row">
+                        <div class="col-md-12">
+                             <button type="submit" class="btn btn-primary" ng-disabled="coordinatesForm.$invalid">Calculate Coordinates</button>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <div class="row" ng-if="vm.coordinates.length > 0">
                     <div class="col-md-12">
                         The coordinates are:
                         <div style="padding: 10px">
-                            <span ng-repeat="c in vm.coordinates" style="display: block; margin-bottom: 5px"> Vertex {{$index + 1 }}: ({{c.X}};{{c.Y}}) </span>
+                            <span ng-repeat="c in vm.coordinates" class="vertex"> Vertex {{$index + 1 }}: ({{c.X}};{{c.Y}}) </span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Enter Coordinate V1:</label>
-                        <input type="number" ng-model="vm.v1.X" placeholder="X" class="form-control" />
-                        <input type="number" ng-model="vm.v1.Y" placeholder="Y" class="form-control" />
+                <form name="rowcolumnForm" ng-submit="vm.calculateRowColumn()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Enter Coordinate V1:</label>
+                            <input type="number" ng-model="vm.v1.X" placeholder="X" class="form-control" step="10" required />
+                            <input type="number" ng-model="vm.v1.Y" placeholder="Y" class="form-control" step="10" required />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Enter Coordinate V2:</label>
-                        <input type="number" ng-model="vm.v2.X" placeholder="X" class="form-control" />
-                        <input type="number" ng-model="vm.v2.Y" placeholder="Y" class="form-control" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Enter Coordinate V2:</label>
+                            <input type="number" ng-model="vm.v2.X" placeholder="X" class="form-control" step="10" required />
+                            <input type="number" ng-model="vm.v2.Y" placeholder="Y" class="form-control" step="10" required />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label>Enter Coordinate V3:</label>
-                        <input type="number" ng-model="vm.v3.X" placeholder="X" class="form-control" />
-                        <input type="number" ng-model="vm.v3.Y" placeholder="Y" class="form-control" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Enter Coordinate V3:</label>
+                            <input type="number" ng-model="vm.v3.X" placeholder="X" class="form-control" step="10" required />
+                            <input type="number" ng-model="vm.v3.Y" placeholder="Y" class="form-control" step="10" required />
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="button" ng-click="vm.calculateRowColumn()" value="Calculate Row & Column" class="btn btn-primary" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" value="Calculate Row & Column" class="btn btn-primary" ng-disabled="rowcolumnForm.$invalid" />
+                        </div>
                     </div>
-                </div>
+                </form>
                 <div class="row" ng-if="vm.rowcolumn.Row">
                     <div class="col-md-12">
                         <div style="padding: 10px">

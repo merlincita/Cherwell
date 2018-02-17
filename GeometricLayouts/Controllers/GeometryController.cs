@@ -14,7 +14,7 @@ namespace GeometricLayouts.Controllers
         /// <returns>list of the triangle coordinates</returns>
         [HttpPost]
         [Route("api/Geometry/CalculateTriangleCoordinates")]
-        public List<Coordinate> CalculateTriangleCoordinates(Item rc)
+        public List<Coordinate> CalculateTriangleCoordinates(GridItem rc)
         {
             var list = new List<Coordinate>();
             var vertex1 = new Coordinate
@@ -45,30 +45,21 @@ namespace GeometricLayouts.Controllers
         /// <summary>
         /// Problem 1B
         /// </summary>
-        /// <param name="vertexs"></param>
-        /// <returns></returns>
+        /// <param name="vertexs">list of the triangle coordinates</param>
+        /// <returns>column and row of that triangle in the square</returns>
         [HttpPost]
         [Route("api/Geometry/CalculateRowColumn")]
-        public Item CalculateRowColumn(List<Coordinate> vertexs)
+        public GridItem CalculateRowColumn(List<Coordinate> vertexs)
         {
             var min = vertexs.Select(obj => obj.Y).Min();
+            
+            var orderedVertexs = vertexs.OrderBy(obj => obj.X).ThenBy(obj => obj.Y).ToList();
+            int col;
+            if (orderedVertexs[0].X == orderedVertexs[1].X)
+                col = orderedVertexs[1].X / 10 * 2 + 1;
+            else col = orderedVertexs[1].X / 10 * 2; // orderedVertexs[0].Y = orderedVertexs[1].Y
 
-            Coordinate vertex;
-            if (vertexs[0].X == vertexs[1].X)
-            {
-                vertex = vertexs[0];
-            }
-            /*else if (vertexs[2].X == vertexs[1].X)
-            {
-                vertex = vertexs[2];
-            }*/
-            else
-            {
-                vertex = vertexs[2];
-            }
-
-            var col = (vertex.X / 10) * 2 + (vertex.X / 10) % 2;
-            return new Item { Row = -min / 10, Column = col };
+            return new GridItem { Row = -min / 10, Column = col };
         }
     }
 }
